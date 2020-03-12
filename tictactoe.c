@@ -6,8 +6,7 @@
 #define BOARD_SIZE 3
 #define CELL_MAX (BOARD_SIZE * BOARD_SIZE - 1)
 
-void print_board(char board[BOARD_SIZE][BOARD_SIZE])
-{
+void print_board(char board[BOARD_SIZE][BOARD_SIZE]){
     int cell = 0;
     printf("\t .................................................\n");
     for (int row = 0; row < BOARD_SIZE; ++row) {
@@ -20,28 +19,48 @@ void print_board(char board[BOARD_SIZE][BOARD_SIZE])
     }
 }
 
-char get_winner(char board[BOARD_SIZE][BOARD_SIZE])
-{
+char get_winner(char board[BOARD_SIZE][BOARD_SIZE]){
     board = board;
     char winner = '-';
 
-    // IMPLEMENTAR
+    for(int i = 0; i < BOARD_SIZE; i++){
+        if ((board[i][0] == board[i][1]) && (board[i][1] == board[i][2])){
+            winner = board[i][0];
+        }
+    }
+
+    for (int i = 0; i < BOARD_SIZE; i++){
+        if ((board[0][i] == board[1][i]) && (board[1][i] == board[2][i])){
+            winner = board[0][i];
+        }
+    }
+
+    if ((board[0][0] == board[1][1]) && (board[1][1] == board[2][2])){
+         winner = board[1][1];
+    }
+    if ((board[0][2] == board[1][1]) && (board[1][1] == board[2][0])){
+        winner = board[1][1];
+    } 
 
     return winner;
 }
 
-bool has_free_cell(char board[BOARD_SIZE][BOARD_SIZE])
-{
+bool has_free_cell(char board[BOARD_SIZE][BOARD_SIZE]){
     board = board;
 
-    // IMPLEMENTAR
+    for(int i = 0; i < BOARD_SIZE; i++){
+        for(int j = 0; j < BOARD_SIZE; j++){
+            if (board[i][j] == '-'){
+                return true;
+            }
+        }
+    }
 
-    return true;
+    return false;
 }
 
-int main(void)
-{
-    printf("TicTacToe [InCoMpLeTo :'(]\n");
+int main(void){
+    printf("TicTacToe \n");
 
     char board[BOARD_SIZE][BOARD_SIZE] = {
         { '-', '-', '-' },

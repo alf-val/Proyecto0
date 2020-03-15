@@ -3,7 +3,7 @@
 #include "stdio.h"
 #include "stdlib.h"
 
-#define BOARD_SIZE 5
+#define BOARD_SIZE 3
 #define CELL_MAX (BOARD_SIZE * BOARD_SIZE - 1)
 
 void print_board(char board[BOARD_SIZE][BOARD_SIZE]){

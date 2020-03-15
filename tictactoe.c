@@ -3,7 +3,7 @@
 #include "stdio.h"
 #include "stdlib.h"
 
-#define BOARD_SIZE 3
+#define BOARD_SIZE 5
 #define CELL_MAX (BOARD_SIZE * BOARD_SIZE - 1)
 
 void print_board(char board[BOARD_SIZE][BOARD_SIZE]){
@@ -20,34 +20,60 @@ void print_board(char board[BOARD_SIZE][BOARD_SIZE]){
 }
 
 char get_winner(char board[BOARD_SIZE][BOARD_SIZE]){
-    board = board;
+    //board = board;
     char winner = '-';
+    int contador = 1;
 
     for(int i = 0; i < BOARD_SIZE; i++){
-        if ((board[i][0] == board[i][1]) && (board[i][1] == board[i][2])){
-            winner = board[i][0];
+      contador = 1;
+      for(int j = 1; j < BOARD_SIZE; j++){
+        if (board[i][j] == board[i][0] && board[i][j] != '-'){
+          contador++;
         }
+      }
+      if (contador == BOARD_SIZE){
+        winner = board[i][0];
+      }
     }
 
-    for (int i = 0; i < BOARD_SIZE; i++){
-        if ((board[0][i] == board[1][i]) && (board[1][i] == board[2][i])){
-            winner = board[0][i];
+    for(int i = 0; i < BOARD_SIZE; i++){
+      contador = 1;
+      for(int j = 1; j < BOARD_SIZE; j++){
+        if (board[j][i] == board[0][i] && board[j][i] != '-'){
+          contador++;
         }
+      }
+      if (contador == BOARD_SIZE){
+        winner = board[0][i];
+      }
     }
 
-    if ((board[0][0] == board[1][1]) && (board[1][1] == board[2][2])){
-         winner = board[1][1];
+    contador = 1;
+    for(int i = 1; i < BOARD_SIZE; i++){
+      if (board[i][i] == board[0][0] && board[i][i] != '-'){
+        contador++;
+        printf("Contador: %d\n", contador );
+      }
+      if (contador == BOARD_SIZE){
+        winner = board[0][0];
+      }
     }
-    if ((board[0][2] == board[1][1]) && (board[1][1] == board[2][0])){
-        winner = board[1][1];
-    } 
+
+    contador = 1;
+    for(int i = 1; i < BOARD_SIZE; i++){
+      if (board[i][BOARD_SIZE - 1 - i] == board[0][BOARD_SIZE - 1] && board[0][BOARD_SIZE - 1] != '-'){
+        contador++;
+      }
+      if (contador == BOARD_SIZE){
+        winner = board[0][BOARD_SIZE - 1];
+      }
+    }
 
     return winner;
 }
 
 bool has_free_cell(char board[BOARD_SIZE][BOARD_SIZE]){
-    board = board;
-
+    //board = board;
     for(int i = 0; i < BOARD_SIZE; i++){
         for(int j = 0; j < BOARD_SIZE; j++){
             if (board[i][j] == '-'){
@@ -62,11 +88,18 @@ bool has_free_cell(char board[BOARD_SIZE][BOARD_SIZE]){
 int main(void){
     printf("TicTacToe \n");
 
-    char board[BOARD_SIZE][BOARD_SIZE] = {
-        { '-', '-', '-' },
-        { '-', '-', '-' },
-        { '-', '-', '-' }
-    };
+    char board[BOARD_SIZE][BOARD_SIZE];
+    // char board[BOARD_SIZE][BOARD_SIZE] = {
+    //     { '-', '-', '-' },
+    //     { '-', '-', '-' },
+    //     { '-', '-', '-' }
+    // };
+
+    for (int i = 0; i < BOARD_SIZE; i++){
+      for (int j = 0; j < BOARD_SIZE; j++){
+        board[i][j] = '-';
+      }
+    }
 
     char turn = 'X';
     char winner = '-';
